@@ -13,6 +13,9 @@
         .box2{
             display:none;
         }
+        .w-5{
+            display :none;
+        }
     </style>
 </head>
 <body>
@@ -49,6 +52,10 @@
           @endif
       </table>
     </div>
+    <div>
+        {{$data->links()}}
+
+    </div>
     <div class="box2 box" id="box2">
         <h4>Insert Form</h4>
         <form action="insert" method="post">
@@ -59,7 +66,7 @@
         </form>
     </div>
    </div >
-   
+
    <script>
     // var ele = document.getElementById("pop1");
     // console.log(ele);

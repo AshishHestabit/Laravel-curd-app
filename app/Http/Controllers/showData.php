@@ -13,7 +13,8 @@ class showData extends Controller
     //
     function list(){
 
-        $data = Student::all();
+        // $data = Student::all(); //THIS WILL FETCH ALL THE DATA SIMPLY
+        $data = Student::paginate(5);
         return view('show',['data'=>$data]);
     }
 
