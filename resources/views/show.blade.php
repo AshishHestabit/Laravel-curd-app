@@ -14,7 +14,9 @@
             display:none;
         }
         .w-5{
-            display :none;
+            /* display :none; */
+            height : 20px;
+            width : 15px;
         }
     </style>
 </head>
@@ -45,19 +47,26 @@
               <td>{{$d['name']}}</td>
               <td>{{$d['urn']}}</td>
               <td>
-                  <a id="delete" onclick="del()" href='{{"delete/".$d["id"]}}'>delete</a>
+                  <a id="delete" onclick="del(this)" href=''>delete</a>
+              </td>
+              <td>
+                  <a id="edit" onclick="edit(this)" href="{{'edit/'.$d['id']}}">Edit</a>
               </td>
           </tr>
           @endforeach
           @endif
-      </table>
+      </table><br>
+     <div>
+     {{$data->links()}}
+     </div>
     </div>
     <div>
-        {{$data->links()}}
 
     </div>
     <div class="box2 box" id="box2">
-        <h4>Insert Form</h4>
+        <div class="d-flex justify-content-between">
+            <h4>Insert Form</h4><h4 onclick="cut(this)">X</h4>
+        </div>
         <form action="insert" method="post">
             @csrf 
             Name:<input type="text" name="name" placeholder="enter your name"><br>
@@ -77,13 +86,15 @@
         //
     }
 
-    function del(){
+    function del(ele){
         // var ele = document.getElementById('delete').style.display='block';
-
+        e = ele
         if(confirm("Are you sure you want to delete")){
             var id = @json($d['id']);
             console.log(id);
-            window.href.location('delete/'+id);
+            // window.location.href('delete/'+id);
+            e.setAttribute("href",`delete/${id}`)
+
         }
     }
 
@@ -98,6 +109,10 @@
     //     }
        
     // }
+    function cut(ele){
+        var box2 = document.getElementById('box2'); 
+        box2.style.display = 'none';
+    }
 
 
         

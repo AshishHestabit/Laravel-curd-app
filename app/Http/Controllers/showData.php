@@ -15,10 +15,11 @@ class showData extends Controller
 
         // $data = Student::all(); //THIS WILL FETCH ALL THE DATA SIMPLY
         $data = Student::paginate(5);
+        // $data = $data->sortBy('urn'); it is throwing error
         return view('show',['data'=>$data]);
     }
 
-    function insert(request $req)
+    function insert(Request $req)
     {
         $stu = new Student;
         $stu->name = $req->name;
@@ -28,6 +29,26 @@ class showData extends Controller
         $req->session()->flash('name',$req->name);
         $req->session()->flash('urn',$req->urn);
         return redirect('show');
+    }
+
+    function update(Request $req)
+    {
+        // $stu = new Student;
+        $stu = Student::find($req->id);
+        $stu->name = $req->name;
+        $stu->urn = $req->urn;
+        $flag = $stu->save();
+        $req->session()->flash('flag_u',$flag);
+        $req->session()->flash('name',$req->name);
+        $req->session()->flash('urn',$req->urn);
+        return redirect('show');
+        // return Student::find($req->id);
+    }
+
+    function edit($id)
+    {
+        $data = Student::find($id);
+        return view('edit',['data'=>$data]);
     }
 
     function delete(request $req,$id)

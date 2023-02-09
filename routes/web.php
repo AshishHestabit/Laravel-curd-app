@@ -24,6 +24,11 @@ Route::get('delete/{id}',[showData::class,'delete']);
 
 Route::post('insert',[showData::class,'insert']);
 
+Route::get('edit/{id}',[showData::class,'edit']);
+
+Route::post('update',[showData::class,'update']);
+
+
 // Route::view('sho','show');
 
 
